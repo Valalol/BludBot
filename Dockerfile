@@ -14,4 +14,4 @@ RUN npm install --production
 COPY . .
 
 # Start the bot
-CMD ["node", "vxbot.js"]
+CMD ["node", "bot.js"]
