@@ -42,7 +42,7 @@ client.on(Events.MessageCreate, async (message) => {
         console.log(`${new Date().toISOString()} - stylé in "${message.channel.name}"`);
         return;
     }
-    if ((message.content.toLowerCase().includes("nul") && Math.random() < REPLY_PROBABILITY) || Math.floor(Math.random() * 50) === 0) {
+    if ((message.content.toLowerCase().includes("nul") && Math.random() < REPLY_PROBABILITY) || (message.content && Math.floor(Math.random() * 50) === 0)) {
         await message.reply(`:nerd: *${message.content}* :nerd:`);
         console.log(`${new Date().toISOString()} - nul in "${message.channel.name}"`);
         return;
