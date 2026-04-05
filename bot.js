@@ -42,7 +42,7 @@ client.on(Events.MessageCreate, async (message) => {
         console.log(`${new Date().toISOString()} - stylé in "${message.channel.name}"`);
         return;
     }
-    if ((message.content.toLowerCase().includes("nul") && Math.random() < REPLY_PROBABILITY) || (message.content && Math.floor(Math.random() * 50) === 0)) {
+    if (message.content.toLowerCase().includes("nul") && Math.random() < REPLY_PROBABILITY) {
         await message.reply(`:nerd: *${message.content}* :nerd:`);
         console.log(`${new Date().toISOString()} - nul in "${message.channel.name}"`);
         return;
@@ -55,6 +55,11 @@ client.on(Events.MessageCreate, async (message) => {
     if (message.content.toLowerCase().includes("manuellement") && Math.random() < REPLY_PROBABILITY) {
         await message.reply(`:sunglasses: automatiquement, Bosse comme un boss, bosse comme un boss :sunglasses:`);
         console.log(`${new Date().toISOString()} - manuellement in "${message.channel.name}"`);
+        return;
+    }
+    if (message.content && Math.floor(Math.random() * 50) === 0) {
+        await message.reply(`:nerd: *${message.content}* :nerd:`);
+        console.log(`${new Date().toISOString()} - nerd in "${message.channel.name}"`);
         return;
     }
 });
