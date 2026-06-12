@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 
 const REPLY_PROBABILITY = parseFloat(process.env.REPLY_PROBABILITY) || 0.3;
+const REPLY_PROBABILITY = parseFloat(process.env.RANDOM_REPLY_PROBABILITY) || 0.01;
 
 // Create a new client
 const client = new Client({
@@ -15,7 +16,15 @@ client.on(Events.ClientReady, readyClient => {
 
 // When a message is sent
 client.on(Events.MessageCreate, async (message) => {
-    if (message.author.bot) return; // ignore bot messages
+    // ignore bot messages
+    if (message.author.bot) return; 
+
+    // ignore messages that are only media (attachments) with no text
+    if (message.attachments && message.attachments.size > 0) return;
+
+    // ignore messages that contain links
+    const urlRegex = /(https?:\/\/|www\.)\S+/i;
+    if (message.content && urlRegex.test(message.content)) return;
 
     if (message.content.toLowerCase().includes("quoi") && Math.random() < REPLY_PROBABILITY) {
         await message.reply("Feur :clown::nerd::clown:");
@@ -57,7 +66,7 @@ client.on(Events.MessageCreate, async (message) => {
         console.log(`${new Date().toISOString()} - manuellement in "${message.channel.name}"`);
         return;
     }
-    if (message.content && Math.floor(Math.random() * 50) === 0) {
+    if (message.content && Math.random() < RANDOM_REPLY_PROBABILITY) {
         await message.reply(`:nerd: *${message.content}* :nerd:`);
         console.log(`${new Date().toISOString()} - nerd in "${message.channel.name}"`);
         return;
