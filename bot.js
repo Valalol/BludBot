@@ -2,7 +2,7 @@ require('dotenv').config();
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 
 const REPLY_PROBABILITY = parseFloat(process.env.REPLY_PROBABILITY) || 0.3;
-const REPLY_PROBABILITY = parseFloat(process.env.RANDOM_REPLY_PROBABILITY) || 0.01;
+const RANDOM_REPLY_PROBABILITY = parseFloat(process.env.RANDOM_REPLY_PROBABILITY) || 0.01;
 
 // Create a new client
 const client = new Client({
